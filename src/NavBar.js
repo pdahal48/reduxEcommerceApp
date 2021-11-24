@@ -25,7 +25,7 @@ const NavBar = () => {
         <Nav.Link href="#action2">Products</Nav.Link>
       </Nav>
         <button className="btn btn-outline-secondary">
-        {cart} <Badge bg="secondary">{cartProducts.length}</Badge>
+        {cart} <Badge bg="danger">{cartProducts.length}</Badge>
             <span className="visually-hidden">unread messages</span>
         </button>
     </Navbar.Collapse>

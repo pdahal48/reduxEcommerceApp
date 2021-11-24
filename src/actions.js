@@ -1,8 +1,10 @@
 import { ADD_ITEM, REMOVE_ITEM } from './actionTypes';
 
-export function addItem() {
+export function addItem(item) {
+    console.log(item);
     return {
-        type: ADD_ITEM
+        type: ADD_ITEM,
+        ...item
     }
 };
 

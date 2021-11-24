@@ -1,8 +1,15 @@
 import React from 'react';
 import { Card, Button, Row, Col } from 'react-bootstrap';
+import { addItem, removeItem } from './actions'
+import { useSelector, useDispatch } from "react-redux";
+
 import './item.css'
 
-const Item = ({ name, price, src, desc }) => {
+const Item = ({ id, name, price, src, desc, handleAdd }) => {
+    const cartProducts = useSelector(state => state.cart)
+    const dispatch = useDispatch();
+    console.log(cartProducts)
+
     return (
         <div>
             <Card className="product-card">
@@ -26,7 +33,7 @@ const Item = ({ name, price, src, desc }) => {
                         ${price}
                     </Col>
                 </Row>
-                    <button className="btn btn-outline-danger"> Add </button>
+                    <button onClick={() => dispatch(addItem({item: {id, name, src, desc, price} }))} className="btn btn-outline-danger"> Add </button>
             </Card>
       </div>
     )
