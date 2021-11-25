@@ -1,14 +1,12 @@
 import React from 'react';
 import { Card, Button, Row, Col } from 'react-bootstrap';
 import { addItem, removeItem } from './actions'
-import { useSelector, useDispatch } from "react-redux";
-
+import { useDispatch } from "react-redux";
 import './item.css'
 
-const Item = ({ id, name, price, src, desc, handleAdd }) => {
-    const cartProducts = useSelector(state => state.cart)
+const Item = ({ id, name, price, src, desc }) => {
+
     const dispatch = useDispatch();
-    console.log(cartProducts)
 
     return (
         <div>

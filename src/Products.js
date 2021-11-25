@@ -8,17 +8,8 @@ import './item.css'
 
 const Products = () => {
     const products = useSelector(state => state.products);
-    const cartProducts = useSelector(state => state.cart)
-    const dispatch = useDispatch();
-
-
-    function handleAdd(item) {
-        dispatch(addItem(item))
-        console.log(cartProducts)
-    }
-
     return (
-        <div>
+        <div className="mt-5">
         <Row>
         <Col className="card-wrapper">
             {Object.values(products).map((p) => (
@@ -28,7 +19,6 @@ const Products = () => {
                     price = {p.price}
                     desc = {p.description}
                     key={p.name}
-                    handleAdd = {handleAdd}
                     id = {uuid()}
                 />
             ))}

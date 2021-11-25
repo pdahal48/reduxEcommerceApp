@@ -1,0 +1,13 @@
+.cartItem-img {
+    height: 13rem;
+    width: 13rem;
+}
+
+.cartItem-name {
+    font-weight: bolder;
+    color: saddlebrown;
+}
+
+.cartItem-price {
+    font-weight: bold;
+}
