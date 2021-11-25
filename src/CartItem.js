@@ -4,8 +4,12 @@ import { useDispatch } from "react-redux";
 import { removeItem } from './actions'
 import './CartItem.css'
 
-const CartItem = ({ name, price, src, desc, id }) => {
+const CartItem = ({ name, price, src, desc, id, qty }) => {
     const dispatch = useDispatch();
+
+    function remove() {
+        dispatch(removeItem(id))
+    }
 
     return (
         <div className="container-fluid justify-content-center mb-3">
@@ -23,11 +27,11 @@ const CartItem = ({ name, price, src, desc, id }) => {
                         {desc}
                     </div>
                     <div>
-                        <b>QTY: 1 </b>
+                        <b>QTY: {qty} </b>
                     </div>
                     <button 
                             className="btn btn-sm btn-primary"
-                            onClick={()=> dispatch(removeItem({id: id}))}
+                            onClick={remove}
                         >
                             Remove item
                         </button>

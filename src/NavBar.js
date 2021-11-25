@@ -2,14 +2,16 @@ import React from 'react'
 import { Nav, Navbar, Badge, Container } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
-import { useSelector } from "react-redux";
+import { useSelector, shallowEqual } from "react-redux";
 import { Link } from 'react-router-dom';
 
 
 const cart = <FontAwesomeIcon icon={faShoppingCart} size="2x"/>
 
 const NavBar = () => {
-    const cartProducts = useSelector(state => state.cart);
+    let numItems = 0;
+    const cartProducts = useSelector((store) => store.cart, shallowEqual);
+    Object.values(cartProducts).map((val) => numItems += val);
 
     return (
     <Navbar bg="light" expand="lg">
@@ -27,7 +29,7 @@ const NavBar = () => {
       </Nav>
       <Link to="/cart">
         <button className="btn btn-outline-secondary" href="/cart">
-        {cart} <Badge bg="danger">{cartProducts.length}</Badge>
+        {cart} <Badge bg="danger">{numItems}</Badge>
             <span className="visually-hidden">unread messages</span>
         </button>
         </Link>

@@ -1,26 +1,23 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import Item from './Item'
 import { Row, Col } from 'react-bootstrap';
-import { uuid } from 'uuidv4';
+import { useSelector, shallowEqual } from "react-redux";
 import './item.css'
 
 const Products = () => {
-    const products = useSelector(state => state.products);
-
+    const products  = useSelector((store) => store.products, shallowEqual);
     return (
         <div className="mt-5">
         <Row>
         <Col className="card-wrapper">
-            {Object.values(products).map((p) => (
+            {Object.keys(products).map(id => (
                 <Item
-                    test = {p}
-                    name={p.name}
-                    src = {p.image_url}
-                    price = {p.price}
-                    desc = {p.description}
-                    key={p.name}
-                    id = {uuid()}
+                    name={products[id].name}
+                    src = {products[id].image_url}
+                    price = {products[id].price}
+                    desc = {products[id].description}
+                    key={products[id].name}
+                    id = {id}
                 />
             ))}
         </Col>

@@ -4,9 +4,12 @@ import { addItem } from './actions'
 import { useDispatch } from "react-redux";
 import './item.css'
 
-const Item = ({ id, name, price, src, desc, test }) => {
+const Item = ({ id, name, price, src, desc }) => {
 
     const dispatch = useDispatch();
+    function add() {
+        dispatch(addItem(id))
+    }
 
     return (
         <div>
@@ -31,7 +34,7 @@ const Item = ({ id, name, price, src, desc, test }) => {
                         ${price}
                     </Col>
                 </Row>
-                    <button onClick={() => dispatch(addItem({item: {id, name, src, desc, price} }))} className="btn btn-outline-danger"> Add </button>
+                    <button onClick={add} className="btn btn-outline-danger"> Add </button>
             </Card>
       </div>
     )

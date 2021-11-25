@@ -1,11 +1,11 @@
 import React from 'react'
-import { useSelector } from "react-redux";
+import { useSelector, shallowEqual } from "react-redux";
 import CartItem from './CartItem';
 import { Col, Row } from 'react-bootstrap';
 
 
 const CartItemList = () => {
-    const cartProducts = useSelector(state => state.cart);
+    const { cart, products } = useSelector((store) => store, shallowEqual);
     let total = 0;
 
     return (
@@ -13,18 +13,29 @@ const CartItemList = () => {
             <h1 className="text-secondary">Your Shopping Cart</h1>
             <Row className="justify-content-center mt-4">
                 <Col>
-                    {Object.values(cartProducts).map((item) => {
-                        total += item.price;
+                {(Object.keys(cart).length !== 0) ?
+                (
+                   <div>
+                    {Object.keys(cart).map((id) => {
+                        total += (cart[id]) * (products[id].price);
                         return (
-                        <CartItem 
-                            name={item.name}
-                            src={item.src}
-                            price={item.price}
-                            desc={item.desc}
-                            key={item.name}
-                            id={item.id}
+                        <CartItem
+                            name={products[id].name}
+                            src={products[id].image_url}
+                            price={products[id].price}
+                            desc={products[id].description}
+                            key={products[id].name}
+                            qty={cart[id]}
+                            id={id}
                         />
                         )})}
+                        </div>
+                ) :
+                        <div>
+                            <h2 className="text-danger"> Your cart is empty </h2>
+                        </div>
+                }  
+
                 </Col>
                 <Col className="col-3 card cart-card">
             <h2 className="text-dark"> Cart Summary </h2>
