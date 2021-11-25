@@ -1,10 +1,10 @@
 import React from 'react';
-import { Card, Button, Row, Col } from 'react-bootstrap';
-import { addItem, removeItem } from './actions'
+import { Card, Row, Col } from 'react-bootstrap';
+import { addItem } from './actions'
 import { useDispatch } from "react-redux";
 import './item.css'
 
-const Item = ({ id, name, price, src, desc }) => {
+const Item = ({ id, name, price, src, desc, test }) => {
 
     const dispatch = useDispatch();
 
