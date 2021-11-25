@@ -11,3 +11,8 @@
 .cartItem-price {
     font-weight: bold;
 }
+
+.cart-card {
+    background-color: lightblue;
+    height: 15rem;
+}
