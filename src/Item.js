@@ -8,7 +8,7 @@ const Item = ({ id, name, price, src, desc }) => {
 
     const dispatch = useDispatch();
     function add() {
-        dispatch(addItem(id))
+        return dispatch(addItem(id));
     }
 
     return (

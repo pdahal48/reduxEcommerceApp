@@ -1,4 +1,4 @@
-import { ADD_ITEM, REMOVE_ITEM } from './actionTypes';
+import { ADD_ITEM, REMOVE_ITEM, APPLY_DISCOUNT } from './actionTypes';
 
 export function addItem(id) {
     return {
@@ -13,3 +13,10 @@ export function removeItem(id) {
         id
     }
 };
+
+export function applyDiscount(discount) {
+    return {
+        type: APPLY_DISCOUNT,
+        discount
+    }
+}

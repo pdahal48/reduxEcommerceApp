@@ -1,12 +1,26 @@
-import React from 'react'
-import { useSelector, shallowEqual } from "react-redux";
+import React, {useState} from 'react'
+import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import CartItem from './CartItem';
 import { Col, Row } from 'react-bootstrap';
+import { applyDiscount } from "./actions";
+import './cartItemList.css'
 
 
 const CartItemList = () => {
-    const { cart, products } = useSelector((store) => store, shallowEqual);
-    let total = 0;
+    const { cart, products, discountAmount, discountApplied, cartValue } = useSelector((store) => store, shallowEqual);
+
+    const [discount, setDiscount] = useState("");
+    const dispatch = useDispatch();
+
+    function handleChange(evt) {
+        setDiscount(evt.target.value);
+    }
+    
+    function handleDiscount(evt) {
+        evt.preventDefault();
+        dispatch(applyDiscount(discount));
+        setDiscount("");
+    }
 
     return (
         <div className="container text-center">
@@ -17,7 +31,6 @@ const CartItemList = () => {
                 (
                    <div>
                     {Object.keys(cart).map((id) => {
-                        total += (cart[id]) * (products[id].price);
                         return (
                         <CartItem
                             name={products[id].name}
@@ -37,13 +50,39 @@ const CartItemList = () => {
                 }  
 
                 </Col>
-                <Col className="col-3 card cart-card">
+                <Col className="col-4 card cart-card">
             <h2 className="text-dark"> Cart Summary </h2>
             <div>
-                <b>Subtotal: ${total}</b>
+                    <b>Subtotal: ${cartValue}</b>
+                    {discountApplied ? (
+                        <div className="text-success">
+                            Your Savings:  {(discountAmount * 100).toFixed(0)}%
+                        </div>
+                    ) : null }
+                    <form onSubmit={handleDiscount}>
+                        <Row className="container justify-content-center mt-3">
+                            <Col className="col-4">
+                                <label htmlFor="discount">Promo Code:</label>
+                            </Col>
+                            <Col className="col-6">
+                                <input
+                                    id="discount"
+                                    name="discount"
+                                    className="form-control"
+                                    value={discount}
+                                    onChange={handleChange}
+                                />
+                            </Col>
+                        </Row>
+                        <Row className="justify-content-center ">
+                            <Col className="promo-btn">
+                                <button className="promo-btn btn btn-primary">Apply Discount</button>
+                            </Col>
+                        </Row>
+                    </form>
                 <div>
                     <button 
-                        className="btn btn-outline-success mt-2"
+                        className="btn checkout-btn btn-outline-success mt-4"
                         onClick = {() => alert('Thank for visiting my site!')}
                     > 
                         <b>
